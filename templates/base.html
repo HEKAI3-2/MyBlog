@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> {{ blog.title }}</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/mystyle.css">
+    {#  awesome  #}
+    <link rel="stylesheet" href="/static/fontawesome/css/font-awesome.min.css">
+    {# 不同的样式   #}
+    <link rel="stylesheet" href="/static/theme/{{ blog.theme }}">
+    {#导入JS文件#}
+    <script src="/static/jquery-3.3.1.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="header">
+    {#  title  #}
+    <p>{{ blog.title }}</p>
+</div>
+{#个人博客开始#}
+<div class="container">
+    <div class="col-md-2">
+        {#   利用面板占位         #}
+        <div class="panel panel-primary">
+            <div class="panel-heading">文章分类</div>
+            <div class="panel-body">
+                {% for category in category_list %}
+                    {#  <p>{{ category.title }}({{ category.article_set.all.count }})</p>#}
+                    <p>{{ category.title }}({{ category.c }})</p>
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">标签分类</div>
+            <div class="panel-body">
+                {% for tag in tag_list %}
+                    <p>{{ tag.title }}({{ tag.c }})</p>
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">文章归档</div>
+            <div class="panel-body">
+                {% for archive in archive_list %}
+                    <p>{{ archive.archive_ym }}({{ archive.c }})</p>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-8">
+        {#  用于替换  #}
+        {% block page-main %}
+
+        {% endblock %}
+    </div>
+    <div class="col-md-2">
+        {#   利用面板占位         #}
+        <div class="panel panel-primary">
+            <div class="panel-heading">右侧广告位一</div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">右侧广告位二</div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

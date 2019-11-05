@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block page-main %}
+    <div class="article_list">
+        {% for article in article_list %}
+            <div class="article">
+                {#       以主键作为链接             #}
+                <p class="article-title">
+                    <a href="/blog/{{ article.user.username }}/article/{{ article.pk }}">{{ article.title }}</a>
+                </p>
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object author-img" src="/media/{{ article.user.avatar }}"
+                                 alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <p>{{ article.desc }}</p>
+                    </div>
+                </div>
+                <div class="article-footer">
+                    <span><a href="/blog/{{ article.user.username }}">{{ article.user.username }}</a>发布于</span>
+                    <span>{{ article.create_time|date:'Y-m-d H:i:s' }}</span>
+                    {#         反向查找，表名_set                   #}
+                    {# <span class="glyphicon glyphicon-comment">评论({{ article.comment_set.all.count }})</span>#}
+                    <span class="glyphicon glyphicon-comment">评论({{ article.comment_count }})</span>
+                    {# 用awesome添加标签       #}
+                    <i class="fa fa-comment-o fa-1x">评论({{ article.comment_count }})</i>
+                    <span class="glyphicon glyphicon-thumbs-up">点赞({{ article.up_count }})</span>
+                    <span class="glyphicon glyphicon-thumbs-down">踩({{ article.down_count }})</span>
+
+                    <hr>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
